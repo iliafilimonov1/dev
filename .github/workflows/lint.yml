@@ -1,0 +1,24 @@
+name: Lint # имя теста
+
+# слушаем события: в начале pull_request, далее push в ветке master
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+# действия: в начале линтим код, все действия запускаются в последней версии ubuntu, node-js и т.д.
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+    # шаги: 
+    steps:
+      - uses: actions/checkout@v2 # настраиваем окружение. создан github
+      - uses: actions/setup-node@v1 # github устанавливает node-js
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm ci # npm install специальный для автоматизации
+      - run: npm lint # команда, которую прописали в package.json под псевдонимом test
