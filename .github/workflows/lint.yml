@@ -22,17 +22,9 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm ci
-      - run: npm run lint
-
-  run-linters-fix:
-    name: Run linters and fix issues
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-      - run: npm ci
-      - run: npm run lint:fix
+      - name: install
+        run: npm ci
+      - name: ESLint
+        run: npm run lint .
+      - name: ESLint fix
+        run: npm run lint:fix .
