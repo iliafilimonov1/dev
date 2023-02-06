@@ -23,8 +23,6 @@ jobs:
 
     - name: Lint with ESLint
       run: |
-        npx eslint . --ext .js,.jsx,.ts,.tsx --config node_modules/eslint-config-airbnb/index.js
-        # Add a flag for fixing the linting errors automatically if desired:
-        # npx eslint . --ext .js,.jsx,.ts,.tsx --config node_modules/eslint-config-airbnb/index.js --fix
+        npm run lint
       env:
         CI: true
