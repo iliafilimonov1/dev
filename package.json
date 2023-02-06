@@ -21,7 +21,7 @@
     "editorconfig-check": "editorconfig-checker",
     "test": "jest",
     "build": "parcel index.html",
-    "deploy": "gh-pages -d build"
+    "deploy": "cd dist && rsync --archive --compress --delete . iliafilimonov1@dev:/var/www/dev/html/"
   },
   "jest": {
     "collectCoverage": true,
