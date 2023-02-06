@@ -1,1 +1,1 @@
-# dev
+# Автотесты и деплой на GitHub Actions
