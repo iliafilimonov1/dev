@@ -6,13 +6,12 @@ on:
     branches:
       - main
 
-jobs:
-  lint:
+run-linters:
+    name: Run linters
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [17.x]
-    - name: Check out Git repository
+
+    steps:
+      - name: Check out Git repository
         uses: actions/checkout@v2
 
       - name: Set up Node.js
