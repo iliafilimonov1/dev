@@ -2,23 +2,35 @@ name: Lint # имя теста
 
 # слушаем события: в начале pull_request, далее push в ветке master
 on:
-  pull_request:
   push:
     branches:
-      - master
+      - main
+  pull_request:
+    branches:
+      - main
 
 # действия: в начале линтим код, все действия запускаются в последней версии ubuntu, node-js и т.д.
 jobs:
-  lint:
+  run-linters:
+    name: Run linters
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [18.x]
-    # шаги: 
+     # шаги: 
     steps:
-      - uses: actions/checkout@v2 # настраиваем окружение. создан github
-      - uses: actions/setup-node@v1 # github устанавливает node-js
+      - name: Check out Git repository
+        uses: actions/checkout@v2 # настраиваем окружение. создается githubом
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v1 # github устанавливает node-js
         with:
-          node-version: ${{ matrix.node-version }}
-      - run: npm ci # npm install специальный для автоматизации
+          node-version: 12
+
+      # ESLint and Prettier must be in `package.json`
+      - name: Install Node.js dependencies
+        run: npm ci # npm install специальный для автоматизации
+
+      - name: Run linters
+        uses: wearerequired/lint-action@v2
+        with:
+          eslint: true
+          prettier: true
       - run: npm lint # команда, которую прописали в package.json под псевдонимом test
