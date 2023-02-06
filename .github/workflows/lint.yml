@@ -28,7 +28,7 @@ jobs:
 
 
   steps:
-      - name: Run linters
+        name: Run linters
       - uses: actions/checkout@v2
       - uses: wearerequired/lint-action@v2
         name: 'nvm install lts/* && npm install'
