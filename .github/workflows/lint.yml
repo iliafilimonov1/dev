@@ -18,13 +18,35 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [18.x]
+        package:
+          - '..'
+          - eslint-config-airbnb
+          - eslint-config-airbnb-base
+    defaults:
+      run:
+        working-directory: "src/${{ matrix.package }}"
 
-    steps:
+
+  steps:
+      - name: Run linters
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: wearerequired/lint-action@v2
+        name: 'nvm install lts/* && npm install'
         with:
-          node-version: ${{ matrix.node-version }}
-      - run: npm ci
+          node-version: 'lts/*'
       - run: npm run lint
-      - run: npm run lint:fix
+
+    # steps:
+    #   - name: Check out Git repository
+    #   - uses: actions/checkout@v2
+
+    #   - name: Set up Node.js
+    #   - uses: actions/setup-node@v1
+    #     with:
+    #       node-version: ${{ matrix.node-version }}
+    #       run: npm ci
+
+    #   - name: Run linters
+    #   - uses: wearerequired/lint-action@v2
+    #     run: npm run lint
+
