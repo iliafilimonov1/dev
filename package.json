@@ -21,7 +21,7 @@
     "editorconfig-check": "editorconfig-checker",
     "test": "jest",
     "build": "parcel index.html",
-    "deploy": "cd dist && rsync --archive --compress --delete . iliafilimonov1@dev:/var/www/github.com/iliafilimonov1/dev/"
+    "deploy": "cd dist --archive --compress --delete . iliafilimonov1@dev:/var/www/github.com/iliafilimonov1/dev/"
   },
   "jest": {
     "collectCoverage": true,
