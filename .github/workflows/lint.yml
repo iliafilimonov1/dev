@@ -1,7 +1,7 @@
 name: Lint
 
 on:
-  # Trigger the workflow on push or pull request,
+ # Trigger the workflow on push or pull request,
   # but only for the main branch
   push:
     branches:
@@ -13,18 +13,20 @@ on:
       - main
 
 jobs:
-  lint:
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+  run-linters:
+    name: Run linters
+    runs-on: ubuntu-latest
 
-      - name: Install Packages
-        run: |
-          yarn install
-      - name: Lint
-        run: |
-          yarn lint
-      - name: Build
-        run: |
-          yarn build
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: install
+        run: npm ci
+      - name: ESLint
+        run: npm run lint
+      - name: ESLint fix
+        run: npm run lint:fix
+      - name: tests
+        run: npm test
