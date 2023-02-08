@@ -13,20 +13,20 @@ on:
       - main
 
 jobs:
-  run-linters:
-    name: Run linters
+  prettier:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - name: Checkout
+        uses: actions/checkout@v2
         with:
-          node-version: ${{ matrix.node-version }}
-      - name: install
-        run: npm ci
-      - name: ESLint
-        run: npm run lint
-      - name: ESLint fix
-        run: npm run lint:fix
-      - name: tests
-        run: npm test
+          # Make sure the actual branch is checked out when running on pull requests
+          ref: ${{ github.head_ref }}
+
+      - name: Prettify code
+        uses: creyD/prettier_action@v3.3
+        with:
+          # This part is also where you can pass other options, for example:
+          prettier_options: --write **/*.{js,md}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
