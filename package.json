@@ -18,20 +18,19 @@
     "prettier": "^2.8.4"
   },
   "scripts": {
-    "format": "prettier --write .",
-    "prepare": "husky install",
     "serve": "parcel index.html",
-    "lint": "eslint **/*.{js,jsx,ts,tsx}",
-    "lint:fix": "eslint --fix **/*.{js,jsx,ts,tsx}",
-    "editorconfig-check": "editorconfig-checker",
+    "lint:prettier": "prettier --check .",
+    "lint:spell": "yaspeller .",
+    "lint": "yarn lint:prettier && yarn lint:code",
+    "lint:code": "eslint --ext .js,.ts,.md .",
+    "prepare": "husky install",
     "test": "jest",
     "build": "parcel index.html",
     "deploy": "cd dist --archive --compress --delete . iliafilimonov1@dev:/var/www/github.com/iliafilimonov1/dev/"
   },
   "lint-staged": {
     "*.{js,json,html,css,md,yml,yaml,ts,tsx}": "prettier --write",
-    "{*js,*.md}": "eslint --cache --fix",
-    "*.md": "yaspeller"
+    "{*js,*.md}": "eslint --cache --fix"
   },
   "jest": {
     "collectCoverage": true,

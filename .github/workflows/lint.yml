@@ -1,7 +1,7 @@
 name: Lint
 
 on:
- # Trigger the workflow on push or pull request,
+  # Trigger the workflow on push or pull request,
   # but only for the main branch
   push:
     branches:
@@ -13,20 +13,18 @@ on:
       - main
 
 jobs:
-  prettier:
-    runs-on: ubuntu-latest
-
+  lint:
+    runs-on: ubuntu-20.04
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        with:
-          # Make sure the actual branch is checked out when running on pull requests
-          ref: ${{ github.head_ref }}
 
-      - name: Prettify code
-        uses: creyD/prettier_action@v3.3
-        with:
-          # This part is also where you can pass other options, for example:
-          prettier_options: --write **/*.{js,md}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Install Packages
+        run: |
+          yarn install
+      - name: Lint
+        run: |
+          yarn lint
+      - name: Build
+        run: |
+          yarn build
