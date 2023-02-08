@@ -29,7 +29,7 @@ jobs:
       - name: ESLint fix
         run: npm run lint:fix
       - name: Setting Github user.email
-        run: git config --global user.email "9991571155i@gmail.com"
+        run: git config --global user.email "iliafilimonov1@gmail.com"
       - name: Setting Github user.name
         run: git config --global user.name "Ilia Filimonov"
       - name: Adding fixes for committing
