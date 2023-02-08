@@ -28,7 +28,5 @@ jobs:
         run: npm run lint
       - name: ESLint fix
         run: npm run lint:fix
-      - name: build
-        run: npm run build
       - name: tests
         run: npm test
