@@ -34,6 +34,8 @@ jobs:
         run: git config --global user.name "Ilia Filimonov"
       - name: Adding fixes for committing
         run: git add .
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Committing ESLint fixes
         run: git commit -m "fixed ESLint issues"
       - name: Pushing fixes to current PR branch
