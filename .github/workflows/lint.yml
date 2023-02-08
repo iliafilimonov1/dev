@@ -28,17 +28,5 @@ jobs:
         run: npm run lint
       - name: ESLint fix
         run: npm run lint:fix
-      - name: Setting Github user.email
-        run: git config --global user.email "iliafilimonov1@gmail.com"
-      - name: Setting Github user.name
-        run: git config --global user.name "Ilia Filimonov"
-      - name: Adding fixes for committing
-        run: git add .
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Committing ESLint fixes
-        run: git commit -m "fixed ESLint issues"
-      - name: Pushing fixes to current PR branch
-        run: git push
       - name: tests
         run: npm test
